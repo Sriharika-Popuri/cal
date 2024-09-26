@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0f7fa;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+
+        .display {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #eceff1;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 32px;
+            margin-bottom: 10px;
+            min-height: 50px;
+            box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .buttons input {
+            font-size: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #81d4fa;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons input:hover {
+            background-color: #4fc3f7;
+        }
+
+        .buttons input.operator {
+            background-color: #0288d1;
+        }
+
+        .buttons input.operator:hover {
+            background-color: #0277bd;
+        }
+
+        .buttons input.equal {
+            background-color: #00897b;
+            grid-column: span 2;
+        }
+
+        .buttons input.equal:hover {
+            background-color: #00695c;
+        }
+
+        .buttons input.clear, .buttons input.backspace {
+            background-color: #d32f2f;
+        }
+
+        .buttons input.clear:hover, .buttons input.backspace:hover {
+            background-color: #c62828;
+        }
+
+        .buttons .invisible {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display"></div>
+        <div class="buttons">
+            <input type="button" value="C" class="clear" onclick="clearDisplay()">
+            <input type="button" value="←" class="backspace" onclick="backspace()">
+            <input type="button" value=" " class="invisible" disabled>
+            <input type="button" value="*" class="operator" onclick="addInput('*')">
+            <input type="button" value="7" onclick="addInput('7')">
+            <input type="button" value="8" onclick="addInput('8')">
+            <input type="button" value="9" onclick="addInput('9')">
+            <input type="button" value="/" class="operator" onclick="addInput('/')">
+            <input type="button" value="4" onclick="addInput('4')">
+            <input type="button" value="5" onclick="addInput('5')">
+            <input type="button" value="6" onclick="addInput('6')">
+            <input type="button" value="+" class="operator" onclick="addInput('+')">
+            <input type="button" value="1" onclick="addInput('1')">
+            <input type="button" value="2" onclick="addInput('2')">
+            <input type="button" value="3" onclick="addInput('3')">
+            <input type="button" value="-" class="operator" onclick="addInput('-')">
+            <input type="button" value="0" onclick="addInput('0')">
+            <input type="button" value="." onclick="addInput('.')">
+            <input type="button" value="=" class="equal" onclick="calculate()">
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function addInput(value) {
+            display.innerText += value;
+        }
+
+        function clearDisplay() {
+            display.innerText = '';
+        }
+
+        function backspace() {
+            display.innerText = display.innerText.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(display.innerText);
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
